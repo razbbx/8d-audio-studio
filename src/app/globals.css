@@ -1,0 +1,225 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─── Lovable Design System Tokens ─────────────────────────────────────────── */
+:root {
+  /* Primary */
+  --cream: #f7f4ed;
+  --charcoal: #1c1c1c;
+  --off-white: #fcfbf8;
+
+  /* Neutrals */
+  --charcoal-83: rgba(28, 28, 28, 0.83);
+  --charcoal-82: rgba(28, 28, 28, 0.82);
+  --charcoal-40: rgba(28, 28, 28, 0.4);
+  --charcoal-4: rgba(28, 28, 28, 0.04);
+  --charcoal-3: rgba(28, 28, 28, 0.03);
+  --muted-gray: #5f5f5d;
+
+  /* Surface & Border */
+  --light-cream: #eceae4;
+  
+  /* Focus & Interactive */
+  --ring-blue: rgba(59, 130, 246, 0.5);
+}
+
+.dark {
+  /* Primary */
+  --cream: #121212;
+  --charcoal: #f7f4ed;
+  --off-white: #000000;
+
+  /* Neutrals */
+  --charcoal-83: rgba(247, 244, 237, 0.83);
+  --charcoal-82: rgba(247, 244, 237, 0.82);
+  --charcoal-40: rgba(247, 244, 237, 0.4);
+  --charcoal-4: rgba(247, 244, 237, 0.04);
+  --charcoal-3: rgba(247, 244, 237, 0.03);
+  --muted-gray: #a0a09e;
+
+  /* Surface & Border */
+  --light-cream: #2a2a2a;
+  
+  /* Focus & Interactive */
+  --ring-blue: rgba(96, 165, 250, 0.5);
+}
+
+:root {
+  /* Tailwind CSS Compat */
+  --background: var(--cream);
+  --foreground: var(--charcoal);
+  --card: var(--cream);
+  --card-foreground: var(--charcoal);
+  --popover: var(--cream);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--charcoal);
+  --primary-foreground: var(--off-white);
+  --secondary: transparent;
+  --secondary-foreground: var(--charcoal);
+  --muted: var(--charcoal-4);
+  --muted-foreground: var(--muted-gray);
+  --accent: var(--charcoal-4);
+  --accent-foreground: var(--charcoal);
+  --destructive: #ef4444;
+  --destructive-foreground: var(--off-white);
+  --border: var(--light-cream);
+  --input: var(--cream);
+  --ring: var(--ring-blue);
+  --radius: 6px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 2);
+  --radius-xl: calc(var(--radius) * 2.66);
+  --radius-full: 9999px;
+}
+
+/* ─── Base reset ─────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    background: var(--background);
+    color: var(--foreground);
+    /* Camera Plain Variable fallback */
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: transparent;
+  }
+
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  a {
+    color: var(--charcoal);
+    text-decoration: underline;
+  }
+}
+
+/* ─── Lovable Utilities ─────────────────────────────────────────── */
+
+.heading-display {
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.heading-section {
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -1.2px;
+}
+
+.heading-sub {
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.9px;
+}
+
+.btn-primary {
+  background-color: var(--charcoal);
+  color: var(--off-white);
+  box-shadow: rgba(0,0,0,0) 0px 0px 0px 0px, rgba(0,0,0,0) 0px 0px 0px 0px, rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px;
+  border: none;
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:active {
+  opacity: 0.8;
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--charcoal);
+  border: 1px solid var(--charcoal-40);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+
+.btn-ghost:active {
+  opacity: 0.8;
+}
+
+.btn-ghost:focus-visible {
+  outline: none;
+  box-shadow: rgba(0,0,0,0.1) 0px 4px 12px;
+}
+
+.lovable-card {
+  background-color: var(--cream);
+  border: 1px solid var(--light-cream);
+  border-radius: 12px;
+}
+
+/* ─── Slider overrides for Lovable theme ────────────────────────────── */
+[data-slot="slider-track"] {
+  background: var(--light-cream) !important;
+  height: 6px !important;
+  border-radius: 9999px !important;
+}
+
+[data-slot="slider-range"] {
+  background: var(--charcoal) !important;
+  border-radius: 9999px !important;
+}
+
+[data-slot="slider-thumb"] {
+  background: var(--cream) !important;
+  border: 1px solid var(--charcoal-40) !important;
+  border-radius: 9999px !important;
+  width: 20px !important;
+  height: 20px !important;
+  box-shadow: rgba(0,0,0,0.05) 0px 1px 2px 0px !important;
+  transition: box-shadow 0.2s;
+}
+
+[data-slot="slider-thumb"]:focus-visible {
+  outline: none !important;
+  box-shadow: rgba(0,0,0,0.1) 0px 4px 12px, 0 0 0 2px var(--ring-blue) !important;
+}
+
+/* Fix for Base UI / Radix Slider scroll jumping on focus on mobile/touch */
+[data-slot="slider"] input,
+[data-slot="slider-thumb"] input {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+}
