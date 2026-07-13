@@ -186,6 +186,8 @@ export default function Home() {
         const url = URL.createObjectURL(blob);
         setResultBlob(blob);
         setResultUrl(url);
+        // Auto-download
+        saveAs(blob, files[0].name.replace(/\.[^.]+$/, "") + `-8d.${exportFormat}`);
       } else {
         // Batch processing
         const zip = new JSZip();
@@ -272,6 +274,32 @@ export default function Home() {
               </>
             )}
           </button>
+          {/* Download button in header */}
+          {resultUrl && resultBlob && !isProcessing && files.length === 1 && (
+            <>
+              <button
+                onClick={handleDownload}
+                className="btn-primary h-[34px] px-3 rounded-[6px] text-[12px] font-medium flex items-center gap-1 shrink-0"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="7 10 12 15 17 10" />
+                  <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                {exportFormat.toUpperCase()}
+              </button>
+              <button
+                onClick={() => { if (resultUrl) URL.revokeObjectURL(resultUrl); setResultUrl(null); setResultBlob(null); }}
+                className="btn-ghost h-[34px] w-[34px] rounded-[6px] flex items-center justify-center shrink-0"
+                aria-label="Discard"
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </button>
+            </>
+          )}
           <ThemeToggle />
         </div>
       </header>
@@ -456,29 +484,10 @@ export default function Home() {
           </div>
         )}
 
-        {/* Result */}
-        {resultUrl && resultBlob && !isProcessing && (
+        {/* Result: audio player in footer */}
+        {resultUrl && resultBlob && !isProcessing && files.length === 1 && (
           <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 px-5 py-3">
             <audio src={resultUrl} controls className="flex-1 w-full sm:w-auto min-w-[200px] h-[36px]" />
-            <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
-              <button
-                onClick={handleDownload}
-                className="btn-primary h-[36px] flex-1 sm:flex-none px-4 rounded-[6px] text-[13px] font-medium flex items-center justify-center gap-1.5"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                {exportFormat.toUpperCase()}
-              </button>
-              <button
-                onClick={() => { if (resultUrl) URL.revokeObjectURL(resultUrl); setResultUrl(null); setResultBlob(null); }}
-                className="btn-ghost h-[36px] px-3 rounded-[6px] text-[13px] font-medium shrink-0"
-              >
-                Discard
-              </button>
-            </div>
           </div>
         )}
 
